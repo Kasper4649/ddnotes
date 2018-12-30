@@ -1,7 +1,8 @@
-package com.dingdangmao.wetouch;
+package com.dingdangmao.wetouch.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,6 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.dingdangmao.wetouch.Activity.Edit;
+import com.dingdangmao.wetouch.Bean.Model;
+import com.dingdangmao.wetouch.R;
+import com.dingdangmao.wetouch.db;
 
 import java.util.HashMap;
 
@@ -78,14 +84,21 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
                 return true;
             }
         });
+
+        v.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final int pos = v.getAdapterPosition();
+                update(p.getContext(), pos);
+            }
+        });
+
         return v;
     }
 
     public void onBindViewHolder(myViewHolder holder, int position) {
         Model p = mList.get(position);
         try {
-
-
             holder.total.setText("¥ " + String.valueOf(p.getMoney()));
             holder.tip.setText(p.getTip());
             String tmp = tag.get(p.getType());
@@ -117,7 +130,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
 
             int id = mList.get(pos).getId();
             Log.i("delete", pos + " " + id);
-            write.execSQL("delete  from money where id=?", new Integer[]{id});
+            write.execSQL("delete from money where id=?", new Integer[]{id});
 
 
         } catch (Exception e) {
@@ -140,5 +153,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
 
     }
 
+    void update(Context context, final int pos) {
+        int id = mList.get(pos).getId();
+
+        Intent intent = new Intent(context, Edit.class);
+        intent.putExtra("edit_id", id);
+        context.startActivity(intent);
+
+    }
 }
 

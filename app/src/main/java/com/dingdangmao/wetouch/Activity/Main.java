@@ -17,10 +17,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.dingdangmao.wetouch.Adapter;
-import com.dingdangmao.wetouch.Model;
+import com.dingdangmao.wetouch.Adapter.Adapter;
+import com.dingdangmao.wetouch.Bean.Model;
 import com.dingdangmao.wetouch.R;
-import com.dingdangmao.wetouch.dateTounix;
 import com.dingdangmao.wetouch.db;
 import com.jaeger.library.StatusBarUtil;
 
@@ -75,8 +74,8 @@ public class Main extends Base {
                         startActivity(intent1);
                         break;
                     case R.id.type:
-                        Intent intent3 = new Intent(Main.this, Type.class);
-                        startActivity(intent3);
+                        Intent intent2 = new Intent(Main.this, Type.class);
+                        startActivity(intent2);
                         break;
                     default:
                         break;
@@ -162,7 +161,7 @@ public class Main extends Base {
                 int type = cursor.getInt(cursor.getColumnIndex("type"));
                 String tip = cursor.getString(cursor.getColumnIndex("tip"));
                 Log.i("model", id + " ");
-                mlist.add(new Model(dateTounix.To(year, month, day), total, type, tip, id));
+                mlist.add(new Model(year + "-" + month + "-" + day, total, type, tip, id));
 
             } while (cursor.moveToNext());
 
@@ -190,6 +189,11 @@ public class Main extends Base {
 
     @Subscribe
     public void OnAdd(Add ins) {
+        refresh = true;
+    }
+
+    @Subscribe
+    public void OnEdit(Edit ins) {
         refresh = true;
     }
 

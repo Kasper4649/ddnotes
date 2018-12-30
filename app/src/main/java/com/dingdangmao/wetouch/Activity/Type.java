@@ -65,8 +65,7 @@ public class Type extends Base {
             bar.setDisplayShowTitleEnabled(false);
         }
 
-        //Util.toolbar(this);
-        flag=getIntent().getBooleanExtra("flag",false);
+        flag = getIntent().getBooleanExtra("flag",false);
 
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +92,7 @@ public class Type extends Base {
                     SQLiteDatabase read = mydb.getWritableDatabase();
                     try {
 
-                        read.execSQL("insert into tag(type)values(?)", new String[]{t});
+                        read.execSQL("insert into tag(type) values(?)", new String[]{t});
 
                     } catch (Exception e) {
 
@@ -107,14 +106,13 @@ public class Type extends Base {
                             mTag.addTag(t);
                             mytag.add(t);
                             ed.setText("");
-                            TagView tg=(TagView)mTag.getChildAt(mTag.getChildCount()-1);
+                            TagView tg = (TagView)mTag.getChildAt(mTag.getChildCount() - 1);
                             tg.setTypeface(typeface);
 
                         }
                     });
 
                     if(flag) {
-
                         EventBus.getDefault().post(new Tag());
                     }
                 }
@@ -124,7 +122,7 @@ public class Type extends Base {
 
         mTag.setTheme(0);
         mTag.setTagBackgroundColor(Color.TRANSPARENT);
-        //mTag.setTagTypeface(typeface);貌似有bug,只能手动设置
+
         mTag.setOnTagClickListener(new TagView.OnTagClickListener() {
 
             @Override
@@ -214,7 +212,7 @@ public class Type extends Base {
 
         SQLiteDatabase write = mydb.getWritableDatabase();
         try {
-            write.execSQL("delete  from tag where type=?", new String[]{tag});
+            write.execSQL("delete from tag where type=?", new String[]{tag});
         } catch (Exception e) {
 
             e.printStackTrace();

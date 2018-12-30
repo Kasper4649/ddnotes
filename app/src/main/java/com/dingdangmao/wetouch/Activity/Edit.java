@@ -22,7 +22,6 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +32,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import co.lujun.androidtagview.TagContainerLayout;
 import co.lujun.androidtagview.TagView;
 
-public class Add extends Base {
+public class Edit extends Base {
 
     @BindView(R.id.ok)
     public Button ok;
@@ -58,10 +57,18 @@ public class Add extends Base {
 
     private db mydb = new db(this, "mydb.db", null, 3);
     private HashMap<String, Integer> type = new HashMap<String, Integer>();
-    private int cur = 0;
+    private int cur;
+
     private String timestr;
 
     private boolean refresh = true;
+
+    private boolean is_type_selected = false;
+
+    private int edit_id, edit_year, edit_month, edit_day, edit_cur;
+    private float edit_money;
+    private String edit_tip;
+
 
     @Override
     public int getLayoutId() {
@@ -71,6 +78,7 @@ public class Add extends Base {
 
     @Override
     public void init(@Nullable Bundle savedInstanceState) {
+
 
         EventBus.getDefault().register(this);
         ActionBar bar = getSupportActionBar();
@@ -86,23 +94,21 @@ public class Add extends Base {
             money.setText(savedInstanceState.getString("money"));
         }
 
-        Calendar now = Calendar.getInstance();
-        timestr = String.valueOf(now.get(Calendar.YEAR)) + "-" + String.valueOf(now.get(Calendar.MONTH) + 1) + "-" + String.valueOf(now.get(Calendar.DAY_OF_MONTH));
-        tip_date.setText(timestr);
+        fill_data();
+
 
         mTag.setTheme(0);
         mTag.setOnTagClickListener(new TagView.OnTagClickListener() {
             @Override
             public void onTagClick(int position, String tag) {
                 if (tag.equals("自定义")) {
-                    Intent intent = new Intent(Add.this, Type.class);
+                    Intent intent = new Intent(Edit.this, Type.class);
                     intent.putExtra("flag", true);
                     startActivity(intent);
                 } else {
                     cur = type.get(tag);
-                    if (tip_type.getVisibility() == View.INVISIBLE)
-                        tip_type.setVisibility(View.VISIBLE);
                     tip_type.setText(tag);
+                    is_type_selected = true;
                 }
             }
 
@@ -115,23 +121,29 @@ public class Add extends Base {
             }
         });
 
+
+
+
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                // 不知道为什么，在点击事件外面时候 cur 还有值，在这里面就为默认 0 了....
+                // 只能重新赋值
+                if(!is_type_selected)
+                    cur = edit_cur;
+
+
                 SQLiteDatabase write = mydb.getWritableDatabase();
                 String mstr = money.getText().toString();
                 String tstr = tip.getText().toString();
                 if (mstr.length() == 0) {
-                    new SweetAlertDialog(Add.this)
+                    new SweetAlertDialog(Edit.this)
                             .setTitleText("金额不能为空")
                             .show();
 
-                } else if (cur == 0) {
-                    new SweetAlertDialog(Add.this)
-                            .setTitleText("你还未选择类别")
-                            .show();
-
-                } else {
+                }  else {
 
                     String[] tmp = timestr.split("-");
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -142,21 +154,22 @@ public class Add extends Base {
                     } catch (Exception e) {
 
                     }
+
+
                     int r = (int) (date.getTime() / 1000);
                     Log.i("tag", r + "");
-                    write.execSQL("insert into money(year,month,day,unix,total,tip,type)values(?,?,?,?,?,?,?)", new String[]{tmp[0], tmp[1], tmp[2], String.valueOf(r), mstr,
-                            tstr, String.valueOf(cur)}
+
+                    write.execSQL("update money set year=?,month=?,day=?,unix=?, total=?, tip=?, type=? where id=?",
+                            new String[]{tmp[0], tmp[1], tmp[2], String.valueOf(r), mstr,
+                            tstr, String.valueOf(cur), String.valueOf(edit_id)}
                     );
 
-                    EventBus.getDefault().post(new Add());
+                    write.close();
+                    EventBus.getDefault().post(new Edit());
 
-                    new SweetAlertDialog(Add.this)
-                            .setTitleText("添加成功")
+                    new SweetAlertDialog(Edit.this)
+                            .setTitleText("修改成功")
                             .show();
-
-                    money.setText("");
-                    tip.setText("");
-
                 }
             }
         });
@@ -165,7 +178,7 @@ public class Add extends Base {
             @Override
             public void onClick(View v) {
                 final boolean[] type = new boolean[]{true, true, true, false, false, false};
-                TimePickerView pvTime = new TimePickerView.Builder(Add.this, new TimePickerView.OnTimeSelectListener() {
+                TimePickerView pvTime = new TimePickerView.Builder(Edit.this, new TimePickerView.OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
 
@@ -179,6 +192,42 @@ public class Add extends Base {
                 pvTime.show();
             }
         });
+    }
+
+    private void fill_data() {
+
+        Intent intent = getIntent();
+        edit_id = intent.getIntExtra("edit_id", -1);
+        SQLiteDatabase write = mydb.getWritableDatabase();
+        Cursor cursor = write.rawQuery("select * from money where id = " + edit_id, null);
+        if (cursor.moveToFirst()) {
+            do {
+                edit_year = cursor.getInt(cursor.getColumnIndex("year"));
+                edit_month = cursor.getInt(cursor.getColumnIndex("month"));
+                edit_day = cursor.getInt(cursor.getColumnIndex("day"));
+                edit_cur = cursor.getInt(cursor.getColumnIndex("type"));
+                edit_money = cursor.getFloat(cursor.getColumnIndex("total"));
+                edit_tip = cursor.getString(cursor.getColumnIndex("tip"));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        SQLiteDatabase read = mydb.getWritableDatabase();
+        cursor = read.rawQuery("select * from tag where id = " + edit_cur, null);
+        if (cursor.moveToFirst()) {
+            do {
+                String tag = cursor.getString(cursor.getColumnIndex("type"));
+                tip_type.setText(tag);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        tip_type.setVisibility(View.VISIBLE);
+        timestr = String.valueOf(edit_year) + "-" + String.valueOf(edit_month) + "-" + String.valueOf(edit_day);
+        tip_date.setText(timestr);
+        money.setText(String.valueOf(edit_money));
+        tip.setText(edit_tip);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -248,4 +297,7 @@ public class Add extends Base {
         refresh = true;
     }
 
+
 }
+
+

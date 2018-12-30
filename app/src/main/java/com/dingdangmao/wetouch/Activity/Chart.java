@@ -14,8 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.dingdangmao.wetouch.AdapterChart;
-import com.dingdangmao.wetouch.ChartModel;
+import com.dingdangmao.wetouch.Adapter.AdapterChart;
+import com.dingdangmao.wetouch.Bean.ChartModel;
 
 import com.dingdangmao.wetouch.R;
 import com.dingdangmao.wetouch.db;

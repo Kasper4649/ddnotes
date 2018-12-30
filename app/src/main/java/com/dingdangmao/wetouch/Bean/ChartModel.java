@@ -1,4 +1,4 @@
-package com.dingdangmao.wetouch;
+package com.dingdangmao.wetouch.Bean;
 
 
 

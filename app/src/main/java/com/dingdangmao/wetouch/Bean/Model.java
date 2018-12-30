@@ -1,20 +1,21 @@
-package com.dingdangmao.wetouch;
+package com.dingdangmao.wetouch.Bean;
 
 
 public class Model {
     private int id;
-    private int time;
+    private String time;
     private float money;
     private int type;
     private String tip;
 
-    public Model(int time,float money,int type,String tip,int id){
+    public Model(String time,float money,int type,String tip,int id){
         this.time = time;
         this.money = money;
         this.type = type;
         this.tip = tip;
         this.id = id;
     }
+
     public String getTime() {
         return String.valueOf(time);
     }
