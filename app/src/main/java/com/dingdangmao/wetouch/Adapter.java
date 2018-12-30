@@ -14,9 +14,7 @@ import java.util.HashMap;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-/**
- * Created by suxiaohui on 2017/5/11.
- */
+
 
 public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     private db mydb = null;
@@ -43,7 +41,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
         }
     }
 
-    Adapter(Context ctx, java.util.List<Model> tmp, HashMap<Integer, String> tag) {
+    public Adapter(Context ctx, java.util.List<Model> tmp, HashMap<Integer, String> tag) {
         context = ctx;
         mList = tmp;
         this.tag = tag;
@@ -73,14 +71,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
                     @Override
                     public void onClick(SweetAlertDialog sDialog) {
                         sDialog.dismissWithAnimation();
-                        Pool.run(new Runnable() {
-                            @Override
-                            public void run() {
-                                delete(pos);
-                            }
-                        });
-
-
+                        delete(pos);
                     }
                 }).show();
 
@@ -94,9 +85,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
         Model p = mList.get(position);
         try {
 
-            holder.f.setBackgroundColor(MyColor.data2[p.getType() % MyColor.data2.length]);
+
             holder.total.setText("¥ " + String.valueOf(p.getMoney()));
-            holder.type.setTextColor(MyColor.data2[p.getType() % MyColor.data2.length]);
             holder.tip.setText(p.getTip());
             String tmp = tag.get(p.getType());
             if (tmp != null)
@@ -131,15 +121,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
 
 
         } catch (Exception e) {
-            D.show(context, e.toString());
-
+            new SweetAlertDialog(context)
+                    .setTitleText("")
+                    .setContentText(e.toString())
+                    .show();
         }
         ((Activity) context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 mList.remove(pos);
                 notifyDataSetChanged();
-                D.tip(context, "删除成功！");
+                new SweetAlertDialog(context)
+                        .setTitleText("删除成功！")
+                        .show();
 
             }
         });

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dingdangmao.wetouch.start">
+    tools:context="com.dingdangmao.wetouch.Activity.Start">
 
     <ImageView
         android:id="@+id/iv"
@@ -12,36 +12,5 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
-    <LinearLayout
-        android:id="@+id/f"
 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="30dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="60dp"
-            android:gravity="center"
-            android:text="叮当记账"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:gravity="center"
-            android:text="Powered by @叮当猫"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp" />
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.dingdangmao.wetouch.Main">
+    tools:context="com.dingdangmao.wetouch.Activity.Main">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="叮当记账"
+                        android:text="@string/app_name"
                         android:textStyle="bold" />
                 </android.support.v7.widget.Toolbar>
 

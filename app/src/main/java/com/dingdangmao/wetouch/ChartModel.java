@@ -1,8 +1,6 @@
 package com.dingdangmao.wetouch;
 
-/**
- * Created by suxiaohui on 2017/5/12.
- */
+
 
 public class ChartModel {
         private float money;

@@ -13,10 +13,7 @@
             android:id="@+id/type"
 
             />
-        <item android:title="数据导出"
-            android:id="@+id/out"
 
-            />
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/g2">
@@ -24,10 +21,7 @@
             android:id="@+id/psd"
 
             />
-        <item android:title="关于我们"
-            android:id="@+id/about"
 
-             />
     </group>
 
 </menu>

@@ -1,8 +1,5 @@
 package com.dingdangmao.wetouch.Event;
 
-/**
- * Created by gapcoder on 2018/5/30.
- */
 
 public class Tag {
 

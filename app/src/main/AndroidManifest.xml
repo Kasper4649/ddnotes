@@ -5,7 +5,6 @@
     android:versionCode="2"
     android:versionName="1.3">
 
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -15,11 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".Main" />
-        <activity android:name=".Add" />
-        <activity android:name=".Out" />
-        <activity android:name=".About" />
-        <activity android:name=".Type" />
+        <activity android:name=".Activity.Main" />
+        <activity android:name=".Activity.Add" />
+
+        <activity android:name=".Activity.Type" />
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -28,7 +26,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".Chart" />
+        <activity android:name=".Activity.Chart" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -40,11 +38,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".login">
 
-        </activity>
-        <activity android:name=".Reset" />
-        <activity android:name=".start">
+        <activity android:name=".Activity.Start">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

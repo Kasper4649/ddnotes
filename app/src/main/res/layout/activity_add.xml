@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
-    tools:context="com.dingdangmao.wetouch.Add">
+    tools:context="com.dingdangmao.wetouch.Activity.Add">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -95,6 +95,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/select2"
                         android:ems="10"
+                        android:inputType="number"
                         android:hint="消费金额" />
 
                     <EditText
