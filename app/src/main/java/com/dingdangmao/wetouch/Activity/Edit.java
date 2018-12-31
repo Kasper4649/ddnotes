@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.dingdangmao.wetouch.Event.Tag;
 import com.dingdangmao.wetouch.R;
-import com.dingdangmao.wetouch.db;
+import com.dingdangmao.wetouch.Database.db;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

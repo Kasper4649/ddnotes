@@ -58,7 +58,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
+                    android:inputType="number"
                     android:background="@drawable/select2"
                     android:layout_margin="5dp"
                     android:hint="年"
@@ -69,7 +69,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
+                    android:inputType="number"
                     android:background="@drawable/select2"
                     android:layout_margin="5dp"
                     android:hint="月"
@@ -79,7 +79,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
+                    android:inputType="number"
                     android:background="@drawable/select2"
                     android:layout_margin="5dp"
                     android:hint="日"

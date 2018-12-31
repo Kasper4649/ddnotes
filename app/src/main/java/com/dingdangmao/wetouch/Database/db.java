@@ -1,4 +1,4 @@
-package com.dingdangmao.wetouch;
+package com.dingdangmao.wetouch.Database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,7 +20,7 @@ public class db extends SQLiteOpenHelper {
 
     private Context mcontext;
 
-    public db(Context context,String name, SQLiteDatabase.CursorFactory factory, int version){
+    public db(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
         super(context, name, factory, 1);
         mcontext = context;
     }

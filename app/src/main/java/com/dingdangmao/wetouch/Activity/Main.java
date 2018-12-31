@@ -20,7 +20,7 @@ import android.view.MenuItem;
 import com.dingdangmao.wetouch.Adapter.Adapter;
 import com.dingdangmao.wetouch.Bean.Model;
 import com.dingdangmao.wetouch.R;
-import com.dingdangmao.wetouch.db;
+import com.dingdangmao.wetouch.Database.db;
 import com.jaeger.library.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;

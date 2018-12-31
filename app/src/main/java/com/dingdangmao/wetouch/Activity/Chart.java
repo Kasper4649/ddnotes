@@ -18,7 +18,7 @@ import com.dingdangmao.wetouch.Adapter.AdapterChart;
 import com.dingdangmao.wetouch.Bean.ChartModel;
 
 import com.dingdangmao.wetouch.R;
-import com.dingdangmao.wetouch.db;
+import com.dingdangmao.wetouch.Database.db;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.charts.ValueLineChart;
@@ -82,8 +82,6 @@ public class Chart extends Base {
             bar.setDisplayHomeAsUpEnabled(true);
             bar.setDisplayShowTitleEnabled(false);
         }
-
-        //Util.toolbar(this);
 
         ok.setOnClickListener(new View.OnClickListener() {
             @Override

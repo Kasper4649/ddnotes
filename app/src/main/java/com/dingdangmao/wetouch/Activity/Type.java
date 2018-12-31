@@ -16,7 +16,7 @@ import android.widget.EditText;
 
 import com.dingdangmao.wetouch.Event.Tag;
 import com.dingdangmao.wetouch.R;
-import com.dingdangmao.wetouch.db;
+import com.dingdangmao.wetouch.Database.db;
 
 import org.greenrobot.eventbus.EventBus;
 

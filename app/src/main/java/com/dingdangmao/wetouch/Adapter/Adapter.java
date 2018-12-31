@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.dingdangmao.wetouch.Activity.Edit;
 import com.dingdangmao.wetouch.Bean.Model;
 import com.dingdangmao.wetouch.R;
-import com.dingdangmao.wetouch.db;
+import com.dingdangmao.wetouch.Database.db;
 
 import java.util.HashMap;
 
