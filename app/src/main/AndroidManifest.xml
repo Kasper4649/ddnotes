@@ -9,7 +9,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/images"
+        android:icon="@drawable/totoro"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
@@ -50,6 +50,7 @@
         <activity android:name=".Activity.Login" >
 
         </activity>
+        <activity android:name=".Activity.Register" />
     </application>
 
 </manifest>

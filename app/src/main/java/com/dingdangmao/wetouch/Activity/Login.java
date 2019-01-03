@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.dingdangmao.wetouch.Database.db;
 import com.dingdangmao.wetouch.R;
@@ -29,8 +30,8 @@ public class Login extends Base {
     @BindView(R.id.btn_confirm)
     public Button btn_confirm;
 
-    @BindView(R.id.btn_cancel)
-    public Button btn_cancel;
+    @BindView(R.id.btn_register)
+    public Button btn_register;
 
     private String username;
     private String password;
@@ -45,10 +46,6 @@ public class Login extends Base {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-
 
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,11 +71,11 @@ public class Login extends Base {
         });
 
 
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
+        btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                et_username.setText("");
-                et_password.setText("");
+                Intent intent = new Intent(Login.this, Register.class);
+                startActivity(intent);
             }
         });
 
@@ -89,7 +86,7 @@ public class Login extends Base {
 
         SQLiteDatabase write = mydb.getWritableDatabase();
         Cursor cursor = write.rawQuery("select * from user where username='" + username + "' and password='" + password +"'", null);
-        if (cursor.getCount() > 0) {
+        if (cursor.moveToFirst()) {
             new SweetAlertDialog(Login.this)
                     .setTitleText("登录成功")
                     .show();

@@ -144,7 +144,8 @@ public class Add extends Base {
                     }
                     int r = (int) (date.getTime() / 1000);
                     Log.i("tag", r + "");
-                    write.execSQL("insert into money(year,month,day,unix,total,tip,type)values(?,?,?,?,?,?,?)", new String[]{tmp[0], tmp[1], tmp[2], String.valueOf(r), mstr,
+                    write.execSQL("insert into money(year,month,day,unix,total,tip,type)values(?,?,?,?,?,?,?)",
+                            new String[]{tmp[0], tmp[1], tmp[2], String.valueOf(r), mstr,
                             tstr, String.valueOf(cur)}
                     );
 

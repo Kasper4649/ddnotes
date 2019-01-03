@@ -9,14 +9,15 @@ import android.widget.Toast;
 
 public class db extends SQLiteOpenHelper {
     public static final String TABLE_MONEY = "create table money("
-            +"id integer primary key autoincrement,"
-            +"year integer, month integer, day integer, unix integer, total integer, tip text, type integer)";
+            + "id integer primary key autoincrement,"
+            + "year integer, month integer, day integer, unix integer, total integer, tip text, type integer"
+            + ", FOREIGN KEY (type) REFERENCES tag(id))";
     public static final String TABLE_TYPE = "create table tag("
-            +"id integer primary key autoincrement,"
-            +"type text)";
+            + "id integer primary key autoincrement,"
+            + "type text)";
     public static final String TABLE_USER = "create table user("
-            +"id integer primary key autoincrement,"
-            +"username text, password text)";
+            + "id integer primary key autoincrement,"
+            + "username text, password text)";
 
     private Context mcontext;
 
@@ -30,7 +31,7 @@ public class db extends SQLiteOpenHelper {
                 db.execSQL(TABLE_MONEY);
                 db.execSQL(TABLE_TYPE);
                 db.execSQL(TABLE_USER);
-             }catch(Exception e) {
+             } catch(Exception e) {
                  Toast.makeText(mcontext, e.toString(), Toast.LENGTH_SHORT).show();
             }
     }

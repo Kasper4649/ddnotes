@@ -148,7 +148,7 @@ public class Main extends Base {
 
         SQLiteDatabase write = mydb.getWritableDatabase();
         mlist.clear();
-        Cursor cursor = write.rawQuery("select * from money order by id DESC  limit 0,30", null);
+        Cursor cursor = write.rawQuery("select * from money order by id DESC  limit 0, 30", null);
 
         if (cursor.moveToFirst()) {
             do {

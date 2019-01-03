@@ -15,13 +15,6 @@
             />
 
     </group>
-    <group android:checkableBehavior="single"
-        android:id="@+id/g2">
-        <item android:title="密码设置"
-            android:id="@+id/psd"
-
-            />
-
-    </group>
+   
 
 </menu>

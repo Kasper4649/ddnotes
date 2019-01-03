@@ -17,6 +17,7 @@ import com.dingdangmao.wetouch.R;
 import com.dingdangmao.wetouch.Database.db;
 
 import java.util.HashMap;
+import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -25,7 +26,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     private db mydb = null;
     private Context context;
-    private java.util.List<Model> mList;
+    private List<Model> mList;
     private HashMap<Integer, String> tag = new HashMap<Integer, String>();
 
     static class myViewHolder extends RecyclerView.ViewHolder {
@@ -154,8 +155,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     }
 
     void update(Context context, final int pos) {
-        int id = mList.get(pos).getId();
 
+        int id = mList.get(pos).getId();
         Intent intent = new Intent(context, Edit.class);
         intent.putExtra("edit_id", id);
         context.startActivity(intent);
